@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FKTI人格测试</title>
+<style>
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family: "Microsoft YaHei", sans-serif;
+    background: #f2f7ff;
+    color:#333;
+    padding:20px;
+  }
+  .container{
+    max-width:700px;
+    margin:40px auto;
+    background:#fff;
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 2px 15px rgba(0,0,0,0.04);
+  }
+  .title{
+    text-align:center;
+    font-size:26px;
+    color:#2b6cb0;
+    margin-bottom:8px;
+  }
+  .subtitle{
+    text-align:center;
+    color:#777;
+    margin-bottom:40px;
+  }
+  .question{
+    margin:26px 0;
+    font-size:16px;
+    line-height:1.6;
+  }
+  .options{
+    margin-top:10px;
+  }
+  .option{
+    padding:12px 16px;
+    margin:8px 0;
+    border-radius:12px;
+    background:#f8f9fa;
+    border:1px solid #eaeaea;
+    cursor:pointer;
+    transition:0.2s;
+  }
+  .option:hover{
+    background:#e6f0ff;
+  }
+  .option.selected{
+    background:#cfe2ff;
+    border-color:#9ec1e8;
+  }
+  .submit{
+    width:100%;
+    padding:16px;
+    background:#4299e1;
+    color:#fff;
+    border:none;
+    border-radius:14px;
+    font-size:18px;
+    margin-top:40px;
+    cursor:pointer;
+  }
+  .submit:hover{
+    background:#3182ce;
+  }
+  .result{
+    display:none;
+    line-height:1.7;
+  }
+  .result h2{
+    color:#2b6cb0;
+    margin-bottom:12px;
+  }
+  .result h3{
+    margin-top:20px;
+    font-size:17px;
+    color:#333;
+  }
+  .result p{
+    color:#555;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="title">FKTI人格测试</div>
+  <div class="subtitle">50题 · 测出你的真实人格类型</div>
+
+  <div id="quiz"></div>
+  <button class="submit" id="submitBtn">提交查看结果</button>
+
+  <div class="result" id="result">
+    <h2>你的人格：<span id="typeName"></span></h2>
+    <p><strong>代号：</strong><span id="typeCode"></span></p>
+    <h3>性格特色</h3>
+    <p id="typeFeature"></p>
+    <h3>适合行业</h3>
+    <p id="typeJob"></p>
+    <h3>最适配的恋爱人格</h3>
+    <p id="typeLove"></p>
+  </div>
+</div>
+
+<script>
+const questions = [
+  { q: "朋友临时喊你出门蹦跶，你的第一反应是？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "刷到超级搞笑的视频，你会？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "有人没事找事麻烦你，你会？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "出门赴约前你的状态是？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "参加完聚会之后你感觉？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "做决定的时候你通常？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "有人当众夸你，你会？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "看到别人插队没素质，你会？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "周末你的理想状态是？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "生气到爆炸时你会？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "深夜 emo 突然来袭，你会？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "别人借你钱不还，你会？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你在人群里更像？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "有人对你特别好，你会？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你最讨厌的事情是？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你的房间通常是什么样？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "拍照的时候你是？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你点外卖/点菜时？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "遇到不爽的同事/同学，你会？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你走路姿势更接近？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你刷朋友圈的频率？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "别人在你面前秀恩爱，你？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "压力大到顶不住时，你会？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你更喜欢的天气是？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你哭的时候通常是？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你对八卦绯闻的态度？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "别人一直麻烦你，你会？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你更喜欢的娱乐方式？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你对打扮自己的态度？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你觉得自己最像哪种动物？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "进入一个完全陌生的环境，你会？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你说话风格更接近？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你熬夜的真实原因是？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你收到礼物更在意？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你对“讨好别人”这件事？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你做事的风格是？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你对规则的态度？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你更适合什么角色？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你回忆过去时，更多是？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你看剧更喜欢哪种？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "别人对你发脾气，你会？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你在群体聊天里的定位？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你点菜更偏向？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你对未来的态度？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "聚会中途你内心OS？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你买东西优先看什么？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你被误会冤枉时会？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你手机回复消息速度？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "你遇到困难第一反应是？", A:"F", B:"K", C:"T", D:"I" },
+  { q: "用一个词总结你的精神状态？", A:"F", B:"K", C:"T", D:"I" }
+];
+
+const types = {
+  FKTI:{
+    name:"地球外放显眼包天花板",code:"WLDQ",
+    feature:"外向爱热闹，社交能量爆棚，喜欢成为焦点，擅长带动气氛，快乐直接。",
+    job:"主播、销售、公关、活动策划、演艺、市场推广",
+    love:"温柔到犯规情商天花板(WRQJ)、全人类社交润滑剂菩萨(SHYJ)、默默付出顶级冤种老好人(YZLC)"
+  },
+  FKIT:{
+    name:"嘴硬王者护短狂魔",code:"KBDS",
+    feature:"外表强势、嘴硬心软，对自己人极度护短，正义感强，吃软不吃硬。",
+    job:"律师、管理、教练、产品经理、自媒体",
+    love:"发疯治愈双修顶级选手(FHZY)、阳光开朗闷骚怪(YGMS)、心口不一究极别扭怪(XKBG)"
+  },
+  FTKI:{
+    name:"发疯治愈双修顶级选手",code:"FHZY",
+    feature:"能搞笑发疯也能温柔治愈，共情力强，情绪感知力拉满，擅长安抚他人。",
+    job:"心理咨询、教师、护士、文案、博主、社工",
+    love:"嘴硬王者护短狂魔(KBDS)、高冷闷骚看透一切人间观察者(GSBJ)、摆烂躺平至尊法王(BLTP)"
+  },
+  FTIK:{
+    name:"阳光开朗闷骚怪",code:"YGMS",
+    feature:"表面阳光快乐，私下细腻敏感，内心戏足，不太愿意暴露脆弱。",
+    job:"设计、摄影、编辑、运营、文创",
+    love:"生人勿近高冷刺猬精(CWBS)、嘴硬心软顶级傲娇怪(AJXB)、地球外放显眼包天花板(WLDQ)"
+  },
+  KFTI:{
+    name:"全人类社交润滑剂菩萨",code:"SHYJ",
+    feature:"情商高、会说话、人缘好，擅长化解尴尬，性格随和百搭。",
+    job:"HR、公关、行政、销售、商务",
+    love:"摆烂躺平至尊法王(BLTP)、沉默吐槽界灭霸嘴强王者(TCBH)、地球外放显眼包天花板(WLDQ)"
+  },
+  KFIT:{
+    name:"温柔到犯规情商天花板",code:"WRQJ",
+    feature:"温柔体贴、耐心包容，擅长倾听照顾他人，情绪稳定如春风。",
+    job:"教师、医护、客服、顾问、辅导员",
+    love:"嘴硬王者护短狂魔(KBDS)、精神内耗别扭自闭之王(NHZS)、生人勿近高冷刺猬精(CWBS)"
+  },
+  KTFI:{
+    name:"摆烂躺平至尊法王",code:"BLTP",
+    feature:"不爱内卷、不爱争抢，情绪极度稳定，佛系通透，讨厌压力。",
+    job:"文职、财务、技术后端、图书管理、实验室",
+    love:"究极社恐宅王(ZJZN)、全人类社交润滑剂菩萨(SHYJ)、发疯治愈双修顶级选手(FHZY)"
+  },
+  KITF:{
+    name:"默默付出顶级冤种老好人",code:"YZLC",
+    feature:"习惯默默付出扛事，优先考虑别人，心软善良，容易委屈自己。",
+    job:"后勤、公益、行政、助理、护士",
+    love:"高冷闷骚看透一切人间观察者(GSBJ)、温柔到犯规情商天花板(WRQJ)、嘴硬心软顶级傲娇怪(AJXB)"
+  },
+  TFKI:{
+    name:"生人社恐熟人疯批变脸怪",code:"SKFP",
+    feature:"生人安静社恐，熟人放飞自我，反差极大，只对信任的人放开。",
+    job:"技术、设计、写作、剪辑、会计、科研",
+    love:"沉默吐槽界灭霸嘴强王者(TCBH)、精神内耗别扭自闭之王(NHZS)、阳光开朗闷骚怪(YGMS)"
+  },
+  TFIK:{
+    name:"沉默吐槽界灭霸嘴强王者",code:"TCBH",
+    feature:"表面沉默淡定，内心疯狂吐槽，观察力强，梗多又毒。",
+    job:"编剧、段子手、审核、数据分析、律师",
+    love:"生人社恐熟人疯批变脸怪(SKFP)、心口不一究极别扭怪(XKBG)、全人类社交润滑剂菩萨(SHYJ)"
+  },
+  TKFI:{
+    name:"究极社恐宅王·人类低能耗天花板",code:"ZJZN",
+    feature:"喜欢独处，害怕社交，出门耗蓝，宅家续命，不爱被打扰。",
+    job:"程序员、美工、写作、配音、线上工作",
+    love:"摆烂躺平至尊法王(BLTP)、精神内耗别扭自闭之王(NHZS)、生人勿近高冷刺猬精(CWBS)"
+  },
+  TIKF:{
+    name:"高冷闷骚看透一切人间观察者",code:"GSBJ",
+    feature:"话少高冷，心思细腻通透，擅长观察人性，看破不说破。",
+    job:"调研、分析师、医生、科研、策划",
+    love:"默默付出顶级冤种老好人(YZLC)、发疯治愈双修顶级选手(FHZY)、嘴硬心软顶级傲娇怪(AJXB)"
+  },
+  IFKT:{
+    name:"心口不一究极别扭怪",code:"XKBG",
+    feature:"心里想要嘴上说不要，想靠近又装冷淡，极度傲娇别扭。",
+    job:"艺术、设计、创作、音乐、手工",
+    love:"沉默吐槽界灭霸嘴强王者(TCBH)、嘴硬王者护短狂魔(KBDS)、阳光开朗闷骚怪(YGMS)"
+  },
+  IFTK:{
+    name:"嘴硬心软顶级傲娇怪",code:"AJXB",
+    feature:"外表拽酷强势，内心柔软脆弱，爱面子重感情，超好哄。",
+    job:"管理、教练、设计师、博主、创业",
+    love:"默默付出顶级冤种老好人(YZLC)、高冷闷骚看透一切人间观察者(GSBJ)、温柔到犯规情商天花板(WRQJ)"
+  },
+  IKTF:{
+    name:"生人勿近高冷刺猬精",code:"CWBS",
+    feature:"对生人有距离感，浑身是刺，熟悉后才温柔，慢热到极致。",
+    job:"科研、技术、金融、医生、律师、幕后",
+    love:"阳光开朗闷骚怪(YGMS)、究极社恐宅王(ZJZN)、温柔到犯规情商天花板(WRQJ)"
+  },
+  ITKF:{
+    name:"精神内耗别扭自闭之王",code:"NHZS",
+    feature:"想得多、内心戏足，容易自我纠结，习惯自我内耗。",
+    job:"写作、艺术、哲学、心理、编辑、文创",
+    love:"温柔到犯规情商天花板(WRQJ)、生人社恐熟人疯批变脸怪(SKFP)、究极社恐宅王(ZJZN)"
+  }
+};
+
+// 渲染题目
+const quiz = document.getElementById('quiz');
+questions.forEach((item, idx) => {
+  const div = document.createElement('div');
+  div.className = 'question';
+  div.innerHTML = `
+    <div>${idx+1}. ${item.q}</div>
+    <div class="options">
+      <div class="option" data-idx="${idx}" data-ans="A">A：马上冲！热闹怎么能少了我</div>
+      <div class="option" data-idx="${idx}" data-ans="B">B：行吧，陪你逛逛也没事</div>
+      <div class="option" data-idx="${idx}" data-ans="C">C：不想动，只想原地长在床上</div>
+      <div class="option" data-idx="${idx}" data-ans="D">D：拒绝，别来沾朕的清净</div>
+    </div>
+  `;
+  quiz.appendChild(div);
+});
+
+// 选项点击
+const answers = {};
+document.querySelectorAll('.option').forEach(opt => {
+  opt.addEventListener('click', () => {
+    const idx = opt.dataset.idx;
+    const ans = opt.dataset.ans;
+    answers[idx] = ans;
+    opt.parentElement.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+    opt.classList.add('selected');
+  });
+});
+
+// 提交计算
+document.getElementById('submitBtn').addEventListener('click', () => {
+  let count = {F:0,K:0,T:0,I:0};
+  for(let idx in answers){
+    const q = questions[idx];
+    const ans = answers[idx];
+    const c = q[ans];
+    if(c) count[c]++;
+  }
+
+  // 按最高排序组合
+  const keys = Object.keys(count).sort((a,b)=>count[b]-count[a]);
+  const typeKey = keys.join('');
+  const res = types[typeKey] || types.FKTI;
+
+  document.getElementById('typeName').innerText = res.name;
+  document.getElementById('typeCode').innerText = res.code;
+  document.getElementById('typeFeature').innerText = res.feature;
+  document.getElementById('typeJob').innerText = res.job;
+  document.getElementById('typeLove').innerText = res.love;
+
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('submitBtn').style.display = 'none';
+  document.getElementById('result').style.display = 'block';
+});
+</script>
+</body>
+</html>
