@@ -1,320 +1,618 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FKTI人格测试</title>
+<meta charset="utf-8">
+<title>FKTI 人格测试</title>
 <style>
-  *{box-sizing:border-box; margin:0; padding:0;}
-  body{
-    font-family: "Microsoft YaHei", sans-serif;
-    background: #f2f7ff;
-    color:#333;
-    padding:20px;
-  }
-  .container{
-    max-width:700px;
-    margin:40px auto;
-    background:#fff;
-    padding:30px;
-    border-radius:18px;
-    box-shadow:0 2px 15px rgba(0,0,0,0.04);
-  }
-  .title{
-    text-align:center;
-    font-size:26px;
-    color:#2b6cb0;
-    margin-bottom:8px;
-  }
-  .subtitle{
-    text-align:center;
-    color:#777;
-    margin-bottom:40px;
-  }
-  .question{
-    margin:26px 0;
-    font-size:16px;
-    line-height:1.6;
-  }
-  .options{
-    margin-top:10px;
-  }
-  .option{
-    padding:12px 16px;
-    margin:8px 0;
-    border-radius:12px;
-    background:#f8f9fa;
-    border:1px solid #eaeaea;
-    cursor:pointer;
-    transition:0.2s;
-  }
-  .option:hover{
-    background:#e6f0ff;
-  }
-  .option.selected{
-    background:#cfe2ff;
-    border-color:#9ec1e8;
-  }
-  .submit{
-    width:100%;
-    padding:16px;
-    background:#4299e1;
-    color:#fff;
-    border:none;
-    border-radius:14px;
-    font-size:18px;
-    margin-top:40px;
-    cursor:pointer;
-  }
-  .submit:hover{
-    background:#3182ce;
-  }
-  .result{
-    display:none;
-    line-height:1.7;
-  }
-  .result h2{
-    color:#2b6cb0;
-    margin-bottom:12px;
-  }
-  .result h3{
-    margin-top:20px;
-    font-size:17px;
-    color:#333;
-  }
-  .result p{
-    color:#555;
-  }
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#fefefe;color:#333;max-width:720px;margin:0 auto;padding:22px;line-height:1.65}
+.question{margin:26px 0;padding-bottom:14px;border-bottom:1px solid #eee}
+.question p{font-weight:bold;margin-bottom:10px}
+.option{display:block;margin:9px 0;padding:11px 15px;background:#f8f8f8;border-radius:9px;cursor:pointer}
+.option:hover{background:#eef2ff}
+.option input{margin-right:9px}
+.btn{display:block;width:100%;padding:16px;background:#7799ff;color:#fff;border:none;border-radius:11px;font-size:17px;margin-top:32px;cursor:pointer}
+.btn:hover{background:#6688ee}
+.result{display:none;margin-top:40px;padding:30px;background:#f7f9ff;border-radius:14px}
+.result h2{color:#4477cc;margin-top:0}
+.code{font-size:22px;font-weight:bold;color:#5588dd;margin:10px 0}
+.section{margin:14px 0}
+.label{font-weight:bold;color:#4466cc}
 </style>
 </head>
 <body>
 
-<div class="container">
-  <div class="title">FKTI人格测试</div>
-  <div class="subtitle">50题 · 测出你的真实人格类型</div>
+<div class="test">
+  <h1>FKTI 人格深度测试</h1>
 
-  <div id="quiz"></div>
-  <button class="submit" id="submitBtn">提交查看结果</button>
-
-  <div class="result" id="result">
-    <h2>你的人格：<span id="typeName"></span></h2>
-    <p><strong>代号：</strong><span id="typeCode"></span></p>
-    <h3>性格特色</h3>
-    <p id="typeFeature"></p>
-    <h3>适合行业</h3>
-    <p id="typeJob"></p>
-    <h3>最适配的恋爱人格</h3>
-    <p id="typeLove"></p>
+  <div class="question">
+    <p>1. 朋友临时喊你出门蹦跶，你的第一反应是？</p>
+    <label class="option"><input type="radio" name="q1" value="A" required> A：马上冲！热闹怎么能少了我</label>
+    <label class="option"><input type="radio" name="q1" value="B"> B：行吧，陪你逛逛也没事</label>
+    <label class="option"><input type="radio" name="q1" value="C"> C：不想动，只想原地长在床上</label>
+    <label class="option"><input type="radio" name="q1" value="D"> D：拒绝，别来沾朕的清净</label>
   </div>
+
+  <div class="question">
+    <p>2. 刷到超级搞笑的视频，你会？</p>
+    <label class="option"><input type="radio" name="q2" value="A"> A：笑到捶床，疯狂转发所有人</label>
+    <label class="option"><input type="radio" name="q2" value="B"> B：嘴角上扬，默默收藏起来</label>
+    <label class="option"><input type="radio" name="q2" value="C"> C：内心毫无波澜，甚至想划走</label>
+    <label class="option"><input type="radio" name="q2" value="D"> D：就这？一点意思都没有</label>
+  </div>
+
+  <div class="question">
+    <p>3. 有人没事找事来麻烦你，你会？</p>
+    <label class="option"><input type="radio" name="q3" value="A"> A：直接帮到底，热心市民本人</label>
+    <label class="option"><input type="radio" name="q3" value="B"> B：看心情，顺手就帮一下</label>
+    <label class="option"><input type="radio" name="q3" value="C"> C：找借口开溜，绝不沾麻烦</label>
+    <label class="option"><input type="radio" name="q3" value="D"> D：已读不回，假装人间蒸发</label>
+  </div>
+
+  <div class="question">
+    <p>4. 出门赴约前，你的状态是？</p>
+    <label class="option"><input type="radio" name="q4" value="A"> A：光速收拾，说走就走</label>
+    <label class="option"><input type="radio" name="q4" value="B"> B：正常准备，卡点出门</label>
+    <label class="option"><input type="radio" name="q4" value="C"> C：拖拖拉拉，能慢就慢</label>
+    <label class="option"><input type="radio" name="q4" value="D"> D：差点迟到，全靠一路狂奔</label>
+  </div>
+
+  <div class="question">
+    <p>5. 参加完聚会之后你的感受？</p>
+    <label class="option"><input type="radio" name="q5" value="A"> A：越玩越嗨，根本不想结束</label>
+    <label class="option"><input type="radio" name="q5" value="B"> B：还行，正常消耗，不亏</label>
+    <label class="option"><input type="radio" name="q5" value="C"> C：好累，终于可以闭嘴了</label>
+    <label class="option"><input type="radio" name="q5" value="D"> D：灵魂被抽干，需要独处三天回血</label>
+  </div>
+
+  <div class="question">
+    <p>6. 做决定的时候你通常？</p>
+    <label class="option"><input type="radio" name="q6" value="A"> A：果断到离谱，绝不纠结</label>
+    <label class="option"><input type="radio" name="q6" value="B"> B：想两秒，差不多就行</label>
+    <label class="option"><input type="radio" name="q6" value="C"> C：纠结到天荒地老也选不出</label>
+    <label class="option"><input type="radio" name="q6" value="D"> D：随便吧，爱咋咋地</label>
+  </div>
+
+  <div class="question">
+    <p>7. 有人当众夸奖你，你会？</p>
+    <label class="option"><input type="radio" name="q7" value="A"> A：谢谢！我也觉得我超棒</label>
+    <label class="option"><input type="radio" name="q7" value="B"> B：嘿嘿没有啦，一般般</label>
+    <label class="option"><input type="radio" name="q7" value="C"> C：尴尬到抠脚，赶紧转移话题</label>
+    <label class="option"><input type="radio" name="q7" value="D"> D：嘴上说不行，心里爽翻</label>
+  </div>
+
+  <div class="question">
+    <p>8. 看到别人插队没素质，你会？</p>
+    <label class="option"><input type="radio" name="q8" value="A"> A：直接开怼，不惯着毛病</label>
+    <label class="option"><input type="radio" name="q8" value="B"> B：心里不爽，但懒得吵</label>
+    <label class="option"><input type="radio" name="q8" value="C"> C：无所谓，关我屁事</label>
+    <label class="option"><input type="radio" name="q8" value="D"> D：默默忍下，假装没看见</label>
+  </div>
+
+  <div class="question">
+    <p>9. 周末你的理想状态是？</p>
+    <label class="option"><input type="radio" name="q9" value="A"> A：到处浪，见朋友，玩到疯</label>
+    <label class="option"><input type="radio" name="q9" value="B"> B：轻松出门，随便晃一晃</label>
+    <label class="option"><input type="radio" name="q9" value="C"> C：在家躺平，谁也别叫我</label>
+    <label class="option"><input type="radio" name="q9" value="D"> D：彻底隐身，消息都不回</label>
+  </div>
+
+  <div class="question">
+    <p>10. 生气到爆炸时你会？</p>
+    <label class="option"><input type="radio" name="q10" value="A"> A：直接发作，情绪全写脸上</label>
+    <label class="option"><input type="radio" name="q10" value="B"> B：冷脸沉默，谁也不想理</label>
+    <label class="option"><input type="radio" name="q10" value="C"> C：默默走开，自己消化</label>
+    <label class="option"><input type="radio" name="q10" value="D"> D：嘴上很硬，其实超好哄</label>
+  </div>
+
+  <div class="question">
+    <p>11. 深夜突然emo了，你会？</p>
+    <label class="option"><input type="radio" name="q11" value="A"> A：找人发疯吐槽，发泄完就好</label>
+    <label class="option"><input type="radio" name="q11" value="B"> B：听歌刷视频，转移注意力</label>
+    <label class="option"><input type="radio" name="q11" value="C"> C：安静发呆，自己慢慢消化</label>
+    <label class="option"><input type="radio" name="q11" value="D"> D：越想越难过，彻夜内耗</label>
+  </div>
+
+  <div class="question">
+    <p>12. 别人借你钱不还，你会？</p>
+    <label class="option"><input type="radio" name="q12" value="A"> A：直接开口要，别想白嫖</label>
+    <label class="option"><input type="radio" name="q12" value="B"> B：旁敲侧击，疯狂暗示</label>
+    <label class="option"><input type="radio" name="q12" value="C"> C：不好意思提，默默憋屈</label>
+    <label class="option"><input type="radio" name="q12" value="D"> D：算了算了，就当喂狗</label>
+  </div>
+
+  <div class="question">
+    <p>13. 你在人群里更像？</p>
+    <label class="option"><input type="radio" name="q13" value="A"> A：自带BGM的气氛组组长</label>
+    <label class="option"><input type="radio" name="q13" value="B"> B：随和百搭，跟谁都能聊</label>
+    <label class="option"><input type="radio" name="q13" value="C"> C：边缘隐身人，能不说话就不说</label>
+    <label class="option"><input type="radio" name="q13" value="D"> D：浑身写着别靠近我</label>
+  </div>
+
+  <div class="question">
+    <p>14. 有人对你特别好，你会？</p>
+    <label class="option"><input type="radio" name="q14" value="A"> A：加倍对他好，主打真诚</label>
+    <label class="option"><input type="radio" name="q14" value="B"> B：记在心里，慢慢回馈</label>
+    <label class="option"><input type="radio" name="q14" value="C"> C：有点尴尬，不太习惯</label>
+    <label class="option"><input type="radio" name="q14" value="D"> D：表面淡定，内心疯狂感动</label>
+  </div>
+
+  <div class="question">
+    <p>15. 你最讨厌的事情是？</p>
+    <label class="option"><input type="radio" name="q15" value="A"> A：被人冷落、无视、当空气</label>
+    <label class="option"><input type="radio" name="q15" value="B"> B：被欺骗、被背叛、被耍</label>
+    <label class="option"><input type="radio" name="q15" value="C"> C：被频繁打扰、消耗精力</label>
+    <label class="option"><input type="radio" name="q15" value="D"> D：被指指点点、被说教</label>
+  </div>
+
+  <div class="question">
+    <p>16. 你的房间通常是什么样？</p>
+    <label class="option"><input type="radio" name="q16" value="A"> A：乱得很有个性，主打舒服</label>
+    <label class="option"><input type="radio" name="q16" value="B"> B：整齐干净，正常人类水平</label>
+    <label class="option"><input type="radio" name="q16" value="C"> C：偶尔乱，懒得收拾</label>
+    <label class="option"><input type="radio" name="q16" value="D"> D：强迫症级整洁，不能忍乱</label>
+  </div>
+
+  <div class="question">
+    <p>17. 拍照的时候你是？</p>
+    <label class="option"><input type="radio" name="q17" value="A"> A：疯狂摆姿势，镜头收割机</label>
+    <label class="option"><input type="radio" name="q17" value="B"> B：正常配合，拍几张就行</label>
+    <label class="option"><input type="radio" name="q17" value="C"> C：能不拍就不拍，极度抗拒</label>
+    <label class="option"><input type="radio" name="q17" value="D"> D：勉强出镜，表情僵硬</label>
+  </div>
+
+  <div class="question">
+    <p>18. 你点外卖/点菜时？</p>
+    <label class="option"><input type="radio" name="q18" value="A"> A：果断点最爱，绝不犹豫</label>
+    <label class="option"><input type="radio" name="q18" value="B"> B：看推荐，跟着大众走</label>
+    <label class="option"><input type="radio" name="q18" value="C"> C：纠结十分钟，选不出来</label>
+    <label class="option"><input type="radio" name="q18" value="D"> D：随便，啥都行，不挑</label>
+  </div>
+
+  <div class="question">
+    <p>19. 遇到奇葩同事/同学，你会？</p>
+    <label class="option"><input type="radio" name="q19" value="A"> A：直接开怼，不惯着</label>
+    <label class="option"><input type="radio" name="q19" value="B"> B：表面客气，内心吐槽</label>
+    <label class="option"><input type="radio" name="q19" value="C"> C：无视到底，当空气</label>
+    <label class="option"><input type="radio" name="q19" value="D"> D：忍气吞声，心里骂一万遍</label>
+  </div>
+
+  <div class="question">
+    <p>20. 你走路姿势更接近？</p>
+    <label class="option"><input type="radio" name="q20" value="A"> A：大步流星，气场两米八</label>
+    <label class="option"><input type="radio" name="q20" value="B"> B：正常步伐，不急不慢</label>
+    <label class="option"><input type="radio" name="q20" value="C"> C：慢悠悠晃，主打慵懒</label>
+    <label class="option"><input type="radio" name="q20" value="D"> D：低头快走，拒绝对视</label>
+  </div>
+
+  <div class="question">
+    <p>21. 你刷朋友圈的频率？</p>
+    <label class="option"><input type="radio" name="q21" value="A"> A：狂发动态，分享欲爆棚</label>
+    <label class="option"><input type="radio" name="q21" value="B"> B：偶尔发一条，看心情</label>
+    <label class="option"><input type="radio" name="q21" value="C"> C：只看不发，默默潜水</label>
+    <label class="option"><input type="radio" name="q21" value="D"> D：基本不看，也不互动</label>
+  </div>
+
+  <div class="question">
+    <p>22. 别人在你面前秀恩爱，你？</p>
+    <label class="option"><input type="radio" name="q22" value="A"> A：真心祝福，磕到了</label>
+    <label class="option"><input type="radio" name="q22" value="B"> B：无感，很正常</label>
+    <label class="option"><input type="radio" name="q22" value="C"> C：有点酸，默默划走</label>
+    <label class="option"><input type="radio" name="q22" value="D"> D：表面不屑，内心羡慕</label>
+  </div>
+
+  <div class="question">
+    <p>23. 压力大到顶不住时，你会？</p>
+    <label class="option"><input type="radio" name="q23" value="A"> A：立刻制定计划，重拳出击</label>
+    <label class="option"><input type="radio" name="q23" value="B"> B：慢慢来，一步一步解决</label>
+    <label class="option"><input type="radio" name="q23" value="C"> C：找人抱抱，求安慰</label>
+    <label class="option"><input type="radio" name="q23" value="D"> D：直接摆烂，爱咋咋地</label>
+  </div>
+
+  <div class="question">
+    <p>24. 你更喜欢的天气是？</p>
+    <label class="option"><input type="radio" name="q24" value="A"> A：大晴天，热闹又明亮</label>
+    <label class="option"><input type="radio" name="q24" value="B"> B：多云微风，舒服不晒</label>
+    <label class="option"><input type="radio" name="q24" value="C"> C：阴雨天，适合宅家睡觉</label>
+    <label class="option"><input type="radio" name="q24" value="D"> D：安静冷天，适合独处</label>
+  </div>
+
+  <div class="question">
+    <p>25. 你哭的时候通常是？</p>
+    <label class="option"><input type="radio" name="q25" value="A"> A：情绪上来直接爆哭</label>
+    <label class="option"><input type="radio" name="q25" value="B"> B：偷偷哭，不想被发现</label>
+    <label class="option"><input type="radio" name="q25" value="C"> C：很少哭，超级能忍</label>
+    <label class="option"><input type="radio" name="q25" value="D"> D：想哭硬憋，死要面子</label>
+  </div>
+
+  <div class="question">
+    <p>26. 你对八卦绯闻的态度？</p>
+    <label class="option"><input type="radio" name="q26" value="A"> A：激情吃瓜，一线磕糖</label>
+    <label class="option"><input type="radio" name="q26" value="B"> B：偶尔看看，不深究</label>
+    <label class="option"><input type="radio" name="q26" value="C"> C：不感兴趣，懒得理</label>
+    <label class="option"><input type="radio" name="q26" value="D"> D：表面不屑，偷偷猛刷</label>
+  </div>
+
+  <div class="question">
+    <p>27. 别人一直麻烦你，你会？</p>
+    <label class="option"><input type="radio" name="q27" value="A"> A：直接拒绝，绝不委屈</label>
+    <label class="option"><input type="radio" name="q27" value="B"> B：委婉推脱，找借口溜</label>
+    <label class="option"><input type="radio" name="q27" value="C"> C：勉强答应，心里骂街</label>
+    <label class="option"><input type="radio" name="q27" value="D"> D：不好意思拒绝，硬扛到底</label>
+  </div>
+
+  <div class="question">
+    <p>28. 你更喜欢的娱乐方式？</p>
+    <label class="option"><input type="radio" name="q28" value="A"> A：和朋友疯玩，热闹到底</label>
+    <label class="option"><input type="radio" name="q28" value="B"> B：看剧听歌，轻松放松</label>
+    <label class="option"><input type="radio" name="q28" value="C"> C：独自安静，做自己的事</label>
+    <label class="option"><input type="radio" name="q28" value="D"> D：沉浸游戏，与世隔绝</label>
+  </div>
+
+  <div class="question">
+    <p>29. 你对打扮自己的态度？</p>
+    <label class="option"><input type="radio" name="q29" value="A"> A：精致出门，颜值即正义</label>
+    <label class="option"><input type="radio" name="q29" value="B"> B：简单收拾，干净就行</label>
+    <label class="option"><input type="radio" name="q29" value="C"> C：怎么舒服怎么来</label>
+    <label class="option"><input type="radio" name="q29" value="D"> D：看心情，偶尔化妆</label>
+  </div>
+
+  <div class="question">
+    <p>30. 你觉得自己最像哪种动物？</p>
+    <label class="option"><input type="radio" name="q30" value="A"> A：快乐修勾，热情粘人</label>
+    <label class="option"><input type="radio" name="q30" value="B"> B：慵懒小猫，随性自在</label>
+    <label class="option"><input type="radio" name="q30" value="C"> C：佛系乌龟，慢热淡定</label>
+    <label class="option"><input type="radio" name="q30" value="D"> D：刺猬一只，防备心拉满</label>
+  </div>
+
+  <div class="question">
+    <p>31. 进入一个完全陌生的环境，你会？</p>
+    <label class="option"><input type="radio" name="q31" value="A"> A：主动社交，快速融入</label>
+    <label class="option"><input type="radio" name="q31" value="B"> B：慢慢适应，正常相处</label>
+    <label class="option"><input type="radio" name="q31" value="C"> C：紧张不安，浑身难受</label>
+    <label class="option"><input type="radio" name="q31" value="D"> D：极度抗拒，只想逃跑</label>
+  </div>
+
+  <div class="question">
+    <p>32. 你说话风格更接近？</p>
+    <label class="option"><input type="radio" name="q32" value="A"> A：直接爽快，不绕弯子</label>
+    <label class="option"><input type="radio" name="q32" value="B"> B：温和礼貌，照顾别人</label>
+    <label class="option"><input type="radio" name="q32" value="C"> C：话少简洁，能不说就不说</label>
+    <label class="option"><input type="radio" name="q32" value="D"> D：嘴硬傲娇，心口不一</label>
+  </div>
+
+  <div class="question">
+    <p>33. 你熬夜的真实原因是？</p>
+    <label class="option"><input type="radio" name="q33" value="A"> A：玩太嗨，舍不得结束一天</label>
+    <label class="option"><input type="radio" name="q33" value="B"> B：事情没做完，被迫熬夜</label>
+    <label class="option"><input type="radio" name="q33" value="C"> C：单纯不想睡，刷手机</label>
+    <label class="option"><input type="radio" name="q33" value="D"> D：心事太多，根本睡不着</label>
+  </div>
+
+  <div class="question">
+    <p>34. 你收到礼物更在意？</p>
+    <label class="option"><input type="radio" name="q34" value="A"> A：有没有仪式感和心意</label>
+    <label class="option"><input type="radio" name="q34" value="B"> B：实不实用</label>
+    <label class="option"><input type="radio" name="q34" value="C"> C：贵不贵，有没有面子</label>
+    <label class="option"><input type="radio" name="q34" value="D"> D：是不是在敷衍我</label>
+  </div>
+
+  <div class="question">
+    <p>35. 你对“讨好别人”这件事？</p>
+    <label class="option"><input type="radio" name="q35" value="A"> A：绝不讨好，爱谁谁</label>
+    <label class="option"><input type="radio" name="q35" value="B"> B：适当客气，维持体面</label>
+    <label class="option"><input type="radio" name="q35" value="C"> C：懒得讨好，也不惹事</label>
+    <label class="option"><input type="radio" name="q35" value="D"> D：不自觉讨好，怕得罪人</label>
+  </div>
+
+  <div class="question">
+    <p>36. 你做事的风格是？</p>
+    <label class="option"><input type="radio" name="q36" value="A"> A：想到就做，行动力爆炸</label>
+    <label class="option"><input type="radio" name="q36" value="B"> B：计划一下，稳一点来</label>
+    <label class="option"><input type="radio" name="q36" value="C"> C：拖到最后，赶死线</label>
+    <label class="option"><input type="radio" name="q36" value="D"> D：经常半途而废</label>
+  </div>
+
+  <div class="question">
+    <p>37. 你对规则的态度？</p>
+    <label class="option"><input type="radio" name="q37" value="A"> A：严格遵守，原则极强</label>
+    <label class="option"><input type="radio" name="q37" value="B"> B：基本遵守，偶尔灵活</label>
+    <label class="option"><input type="radio" name="q37" value="C"> C：看心情，不想被束缚</label>
+    <label class="option"><input type="radio" name="q37" value="D"> D：经常打破，随心所欲</label>
+  </div>
+
+  <div class="question">
+    <p>38. 你更适合什么角色？</p>
+    <label class="option"><input type="radio" name="q38" value="A"> A：带队指挥，carry全场</label>
+    <label class="option"><input type="radio" name="q38" value="B"> B：配合执行，靠谱稳重</label>
+    <label class="option"><input type="radio" name="q38" value="C"> C：后勤摸鱼，安静干活</label>
+    <label class="option"><input type="radio" name="q38" value="D"> D：自由发挥，创意脑洞</label>
+  </div>
+
+  <div class="question">
+    <p>39. 你回忆过去时，更多是？</p>
+    <label class="option"><input type="radio" name="q39" value="A"> A：开心温暖，全是美好</label>
+    <label class="option"><input type="radio" name="q39" value="B"> B：好坏都有，平静接受</label>
+    <label class="option"><input type="radio" name="q39" value="C"> C：遗憾难过，放不下</label>
+    <label class="option"><input type="radio" name="q39" value="D"> D：不想回忆，向前看</label>
+  </div>
+
+  <div class="question">
+    <p>40. 你看剧更喜欢哪种？</p>
+    <label class="option"><input type="radio" name="q40" value="A"> A：爆笑喜剧，无脑快乐</label>
+    <label class="option"><input type="radio" name="q40" value="B"> B：温情治愈，舒服下饭</label>
+    <label class="option"><input type="radio" name="q40" value="C"> C：悬疑烧脑，刺激反转</label>
+    <label class="option"><input type="radio" name="q40" value="D"> D：深刻致郁，后劲超大</label>
+  </div>
+
+  <div class="question">
+    <p>41. 别人对你发脾气，你会？</p>
+    <label class="option"><input type="radio" name="q41" value="A"> A：直接怼回去，谁怕谁</label>
+    <label class="option"><input type="radio" name="q41" value="B"> B：冷静讲道理，不吵</label>
+    <label class="option"><input type="radio" name="q41" value="C"> C：默默走开，不想理</label>
+    <label class="option"><input type="radio" name="q41" value="D"> D：心里委屈，嘴上不说</label>
+  </div>
+
+  <div class="question">
+    <p>42. 你在群体聊天里的定位？</p>
+    <label class="option"><input type="radio" name="q42" value="A"> A：话题发起人，快乐发动机</label>
+    <label class="option"><input type="radio" name="q42" value="B"> B：捧场王，气氛维护者</label>
+    <label class="option"><input type="radio" name="q42" value="C"> C：潜水观众，只看不发言</label>
+    <label class="option"><input type="radio" name="q42" value="D"> D：话题终结者，冷场大王</label>
+  </div>
+
+  <div class="question">
+    <p>43. 你点菜更偏向？</p>
+    <label class="option"><input type="radio" name="q43" value="A"> A：重口味，越香越爱</label>
+    <label class="option"><input type="radio" name="q43" value="B"> B：家常菜，舒服稳妥</label>
+    <label class="option"><input type="radio" name="q43" value="C"> C：速食快餐，怎么快怎么来</label>
+    <label class="option"><input type="radio" name="q43" value="D"> D：健康清淡，讲究搭配</label>
+  </div>
+
+  <div class="question">
+    <p>44. 你对未来的态度？</p>
+    <label class="option"><input type="radio" name="q44" value="A"> A：充满期待，超级乐观</label>
+    <label class="option"><input type="radio" name="q44" value="B"> B：顺其自然，走一步看一步</label>
+    <label class="option"><input type="radio" name="q44" value="C"> C：迷茫焦虑，不敢多想</label>
+    <label class="option"><input type="radio" name="q44" value="D"> D：压力巨大，经常失眠</label>
+  </div>
+
+  <div class="question">
+    <p>45. 聚会中途你内心OS？</p>
+    <label class="option"><input type="radio" name="q45" value="A"> A：太好玩了，继续继续</label>
+    <label class="option"><input type="radio" name="q45" value="B"> B：还行，不算无聊</label>
+    <label class="option"><input type="radio" name="q45" value="C"> C：啥时候结束啊好想回家</label>
+    <label class="option"><input type="radio" name="q45" value="D"> D：如坐针毡，度秒如年</label>
+  </div>
+
+  <div class="question">
+    <p>46. 你买东西优先看什么？</p>
+    <label class="option"><input type="radio" name="q46" value="A"> A：颜值！第一眼爱上就买</label>
+    <label class="option"><input type="radio" name="q46" value="B"> B：性价比，实用最重要</label>
+    <label class="option"><input type="radio" name="q46" value="C"> C：品牌品质，靠谱放心</label>
+    <label class="option"><input type="radio" name="q46" value="D"> D：别人推荐，跟风入手</label>
+  </div>
+
+  <div class="question">
+    <p>47. 你被误会冤枉时会？</p>
+    <label class="option"><input type="radio" name="q47" value="A"> A：当场解释，必须说清</label>
+    <label class="option"><input type="radio" name="q47" value="B"> B：简单说两句，信不信随意</label>
+    <label class="option"><input type="radio" name="q47" value="C"> C：懒得解释，爱咋咋地</label>
+    <label class="option"><input type="radio" name="q47" value="D"> D：默默委屈，自己难受</label>
+  </div>
+
+  <div class="question">
+    <p>48. 你手机回复消息速度？</p>
+    <label class="option"><input type="radio" name="q48" value="A"> A：秒回，不喜欢拖着</label>
+    <label class="option"><input type="radio" name="q48" value="B"> B：看到就回，基本不忘</label>
+    <label class="option"><input type="radio" name="q48" value="C"> C：经常已读不回</label>
+    <label class="option"><input type="radio" name="q48" value="D"> D：故意不回，假装没看见</label>
+  </div>
+
+  <div class="question">
+    <p>49. 你遇到困难第一反应是？</p>
+    <label class="option"><input type="radio" name="q49" value="A"> A：自己硬刚，绝不认输</label>
+    <label class="option"><input type="radio" name="q49" value="B"> B：找人商量，一起解决</label>
+    <label class="option"><input type="radio" name="q49" value="C"> C：逃避拖延，不想面对</label>
+    <label class="option"><input type="radio" name="q49" value="D"> D：焦虑崩溃，手足无措</label>
+  </div>
+
+  <div class="question">
+    <p>50. 用一个词总结你的精神状态？</p>
+    <label class="option"><input type="radio" name="q50" value="A"> A：疯狂快乐，精力无限</label>
+    <label class="option"><input type="radio" name="q50" value="B"> B：温和佛系，情绪稳定</label>
+    <label class="option"><input type="radio" name="q50" value="C"> C：安静躺平，低能耗活着</label>
+    <label class="option"><input type="radio" name="q50" value="D"> D：别扭傲娇，内心戏爆棚</label>
+  </div>
+
+  <button class="btn" onclick="showResult()">查看深度结果</button>
+</div>
+
+<div class="result" id="result">
+  <h2>你的 FKTI 深度人格报告</h2>
+  <div class="code" id="code"></div>
+  <h3 id="title"></h3>
+
+  <div class="section"><span class="label">性格详解：</span><span id="desc"></span></div>
+  <div class="section"><span class="label">成长氛围倾向：</span><span id="family"></span></div>
+  <div class="section"><span class="label">适合饲养的宠物：</span><span id="pet"></span></div>
+  <div class="section"><span class="label">适合的运动：</span><span id="sport"></span></div>
+  <div class="section"><span class="label">最适配恋爱对象：</span><span id="match"></span></div>
 </div>
 
 <script>
-const questions = [
-  { q: "朋友临时喊你出门蹦跶，你的第一反应是？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "刷到超级搞笑的视频，你会？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "有人没事找事麻烦你，你会？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "出门赴约前你的状态是？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "参加完聚会之后你感觉？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "做决定的时候你通常？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "有人当众夸你，你会？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "看到别人插队没素质，你会？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "周末你的理想状态是？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "生气到爆炸时你会？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "深夜 emo 突然来袭，你会？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "别人借你钱不还，你会？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你在人群里更像？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "有人对你特别好，你会？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你最讨厌的事情是？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你的房间通常是什么样？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "拍照的时候你是？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你点外卖/点菜时？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "遇到不爽的同事/同学，你会？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你走路姿势更接近？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你刷朋友圈的频率？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "别人在你面前秀恩爱，你？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "压力大到顶不住时，你会？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你更喜欢的天气是？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你哭的时候通常是？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你对八卦绯闻的态度？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "别人一直麻烦你，你会？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你更喜欢的娱乐方式？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你对打扮自己的态度？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你觉得自己最像哪种动物？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "进入一个完全陌生的环境，你会？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你说话风格更接近？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你熬夜的真实原因是？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你收到礼物更在意？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你对“讨好别人”这件事？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你做事的风格是？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你对规则的态度？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你更适合什么角色？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你回忆过去时，更多是？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你看剧更喜欢哪种？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "别人对你发脾气，你会？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你在群体聊天里的定位？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你点菜更偏向？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你对未来的态度？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "聚会中途你内心OS？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你买东西优先看什么？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你被误会冤枉时会？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你手机回复消息速度？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "你遇到困难第一反应是？", A:"F", B:"K", C:"T", D:"I" },
-  { q: "用一个词总结你的精神状态？", A:"F", B:"K", C:"T", D:"I" }
-];
-
-const types = {
-  FKTI:{
-    name:"地球外放显眼包天花板",code:"WLDQ",
-    feature:"外向爱热闹，社交能量爆棚，喜欢成为焦点，擅长带动气氛，快乐直接。",
-    job:"主播、销售、公关、活动策划、演艺、市场推广",
-    love:"温柔到犯规情商天花板(WRQJ)、全人类社交润滑剂菩萨(SHYJ)、默默付出顶级冤种老好人(YZLC)"
-  },
-  FKIT:{
-    name:"嘴硬王者护短狂魔",code:"KBDS",
-    feature:"外表强势、嘴硬心软，对自己人极度护短，正义感强，吃软不吃硬。",
-    job:"律师、管理、教练、产品经理、自媒体",
-    love:"发疯治愈双修顶级选手(FHZY)、阳光开朗闷骚怪(YGMS)、心口不一究极别扭怪(XKBG)"
-  },
-  FTKI:{
-    name:"发疯治愈双修顶级选手",code:"FHZY",
-    feature:"能搞笑发疯也能温柔治愈，共情力强，情绪感知力拉满，擅长安抚他人。",
-    job:"心理咨询、教师、护士、文案、博主、社工",
-    love:"嘴硬王者护短狂魔(KBDS)、高冷闷骚看透一切人间观察者(GSBJ)、摆烂躺平至尊法王(BLTP)"
-  },
-  FTIK:{
-    name:"阳光开朗闷骚怪",code:"YGMS",
-    feature:"表面阳光快乐，私下细腻敏感，内心戏足，不太愿意暴露脆弱。",
-    job:"设计、摄影、编辑、运营、文创",
-    love:"生人勿近高冷刺猬精(CWBS)、嘴硬心软顶级傲娇怪(AJXB)、地球外放显眼包天花板(WLDQ)"
-  },
-  KFTI:{
-    name:"全人类社交润滑剂菩萨",code:"SHYJ",
-    feature:"情商高、会说话、人缘好，擅长化解尴尬，性格随和百搭。",
-    job:"HR、公关、行政、销售、商务",
-    love:"摆烂躺平至尊法王(BLTP)、沉默吐槽界灭霸嘴强王者(TCBH)、地球外放显眼包天花板(WLDQ)"
-  },
-  KFIT:{
-    name:"温柔到犯规情商天花板",code:"WRQJ",
-    feature:"温柔体贴、耐心包容，擅长倾听照顾他人，情绪稳定如春风。",
-    job:"教师、医护、客服、顾问、辅导员",
-    love:"嘴硬王者护短狂魔(KBDS)、精神内耗别扭自闭之王(NHZS)、生人勿近高冷刺猬精(CWBS)"
-  },
-  KTFI:{
-    name:"摆烂躺平至尊法王",code:"BLTP",
-    feature:"不爱内卷、不爱争抢，情绪极度稳定，佛系通透，讨厌压力。",
-    job:"文职、财务、技术后端、图书管理、实验室",
-    love:"究极社恐宅王(ZJZN)、全人类社交润滑剂菩萨(SHYJ)、发疯治愈双修顶级选手(FHZY)"
-  },
-  KITF:{
-    name:"默默付出顶级冤种老好人",code:"YZLC",
-    feature:"习惯默默付出扛事，优先考虑别人，心软善良，容易委屈自己。",
-    job:"后勤、公益、行政、助理、护士",
-    love:"高冷闷骚看透一切人间观察者(GSBJ)、温柔到犯规情商天花板(WRQJ)、嘴硬心软顶级傲娇怪(AJXB)"
-  },
-  TFKI:{
-    name:"生人社恐熟人疯批变脸怪",code:"SKFP",
-    feature:"生人安静社恐，熟人放飞自我，反差极大，只对信任的人放开。",
-    job:"技术、设计、写作、剪辑、会计、科研",
-    love:"沉默吐槽界灭霸嘴强王者(TCBH)、精神内耗别扭自闭之王(NHZS)、阳光开朗闷骚怪(YGMS)"
-  },
-  TFIK:{
-    name:"沉默吐槽界灭霸嘴强王者",code:"TCBH",
-    feature:"表面沉默淡定，内心疯狂吐槽，观察力强，梗多又毒。",
-    job:"编剧、段子手、审核、数据分析、律师",
-    love:"生人社恐熟人疯批变脸怪(SKFP)、心口不一究极别扭怪(XKBG)、全人类社交润滑剂菩萨(SHYJ)"
-  },
-  TKFI:{
-    name:"究极社恐宅王·人类低能耗天花板",code:"ZJZN",
-    feature:"喜欢独处，害怕社交，出门耗蓝，宅家续命，不爱被打扰。",
-    job:"程序员、美工、写作、配音、线上工作",
-    love:"摆烂躺平至尊法王(BLTP)、精神内耗别扭自闭之王(NHZS)、生人勿近高冷刺猬精(CWBS)"
-  },
-  TIKF:{
-    name:"高冷闷骚看透一切人间观察者",code:"GSBJ",
-    feature:"话少高冷，心思细腻通透，擅长观察人性，看破不说破。",
-    job:"调研、分析师、医生、科研、策划",
-    love:"默默付出顶级冤种老好人(YZLC)、发疯治愈双修顶级选手(FHZY)、嘴硬心软顶级傲娇怪(AJXB)"
-  },
-  IFKT:{
-    name:"心口不一究极别扭怪",code:"XKBG",
-    feature:"心里想要嘴上说不要，想靠近又装冷淡，极度傲娇别扭。",
-    job:"艺术、设计、创作、音乐、手工",
-    love:"沉默吐槽界灭霸嘴强王者(TCBH)、嘴硬王者护短狂魔(KBDS)、阳光开朗闷骚怪(YGMS)"
-  },
-  IFTK:{
-    name:"嘴硬心软顶级傲娇怪",code:"AJXB",
-    feature:"外表拽酷强势，内心柔软脆弱，爱面子重感情，超好哄。",
-    job:"管理、教练、设计师、博主、创业",
-    love:"默默付出顶级冤种老好人(YZLC)、高冷闷骚看透一切人间观察者(GSBJ)、温柔到犯规情商天花板(WRQJ)"
-  },
-  IKTF:{
-    name:"生人勿近高冷刺猬精",code:"CWBS",
-    feature:"对生人有距离感，浑身是刺，熟悉后才温柔，慢热到极致。",
-    job:"科研、技术、金融、医生、律师、幕后",
-    love:"阳光开朗闷骚怪(YGMS)、究极社恐宅王(ZJZN)、温柔到犯规情商天花板(WRQJ)"
-  },
-  ITKF:{
-    name:"精神内耗别扭自闭之王",code:"NHZS",
-    feature:"想得多、内心戏足，容易自我纠结，习惯自我内耗。",
-    job:"写作、艺术、哲学、心理、编辑、文创",
-    love:"温柔到犯规情商天花板(WRQJ)、生人社恐熟人疯批变脸怪(SKFP)、究极社恐宅王(ZJZN)"
-  }
-};
-
-// 渲染题目
-const quiz = document.getElementById('quiz');
-questions.forEach((item, idx) => {
-  const div = document.createElement('div');
-  div.className = 'question';
-  div.innerHTML = `
-    <div>${idx+1}. ${item.q}</div>
-    <div class="options">
-      <div class="option" data-idx="${idx}" data-ans="A">A：马上冲！热闹怎么能少了我</div>
-      <div class="option" data-idx="${idx}" data-ans="B">B：行吧，陪你逛逛也没事</div>
-      <div class="option" data-idx="${idx}" data-ans="C">C：不想动，只想原地长在床上</div>
-      <div class="option" data-idx="${idx}" data-ans="D">D：拒绝，别来沾朕的清净</div>
-    </div>
-  `;
-  quiz.appendChild(div);
-});
-
-// 选项点击
-const answers = {};
-document.querySelectorAll('.option').forEach(opt => {
-  opt.addEventListener('click', () => {
-    const idx = opt.dataset.idx;
-    const ans = opt.dataset.ans;
-    answers[idx] = ans;
-    opt.parentElement.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
-    opt.classList.add('selected');
-  });
-});
-
-// 提交计算
-document.getElementById('submitBtn').addEventListener('click', () => {
-  let count = {F:0,K:0,T:0,I:0};
-  for(let idx in answers){
-    const q = questions[idx];
-    const ans = answers[idx];
-    const c = q[ans];
-    if(c) count[c]++;
+function showResult() {
+  let ans = {};
+  for(let i=1;i<=50;i++){
+    let v = document.querySelector(`input[name=q${i}]:checked`);
+    if(v) ans[`q${i}`] = v.value;
   }
 
-  // 按最高排序组合
-  const keys = Object.keys(count).sort((a,b)=>count[b]-count[a]);
-  const typeKey = keys.join('');
-  const res = types[typeKey] || types.FKTI;
+  let keys = Object.values(ans);
+  let A = keys.filter(v=>v==='A').length;
+  let B = keys.filter(v=>v==='B').length;
+  let C = keys.filter(v=>v==='C').length;
+  let D = keys.filter(v=>v==='D').length;
 
-  document.getElementById('typeName').innerText = res.name;
-  document.getElementById('typeCode').innerText = res.code;
-  document.getElementById('typeFeature').innerText = res.feature;
-  document.getElementById('typeJob').innerText = res.job;
-  document.getElementById('typeLove').innerText = res.love;
+  let type;
+  if(A > B && A > C && A > D) type = 'HAHA';
+  else if(B > A && B > C && B > D) type = 'SOFT';
+  else if(C > A && C > B && C > D) type = 'LANM';
+  else if(D > A && D > B && D > C) type = 'CICI';
+  else if(A > C && B > D) type = 'MENS';
+  else if(B > A && C > D) type = 'XRAY';
+  else if(A > D && C > B) type = 'BBBB';
+  else if(B > D && A > C) type = 'YEYE';
+  else if(C > A && D > B) type = 'HHHH';
+  else if(D > C && A > B) type = '2FAC';
+  else if(B > C && D > A) type = 'TUCA';
+  else if(A > B && D > C) type = 'ROOO';
+  else if(C > D && B > A) type = 'FUDD';
+  else if(D > A && B > C) type = 'AWAY';
+  else if(A > C && D > B) type = 'DUAN';
+  else type = 'EMMM';
 
-  document.getElementById('quiz').style.display = 'none';
-  document.getElementById('submitBtn').style.display = 'none';
+  const data = {
+    HAHA:{
+      title:'人间显眼包 · 快乐病毒',
+      desc:'热情外放，感染力超强，喜欢热闹，走到哪里都能带动气氛。内心简单直接，不喜欢藏着掖着，情绪来得快去得也快。',
+      family:'家庭氛围通常轻松热闹，父母偏向鼓励式教育，从小被允许表达情绪。',
+      pet:'柯基、柴犬、小鹦鹉（需要能陪你疯、互动强的小动物）',
+      sport:'羽毛球、跳舞、骑行、团体游戏',
+      match:'最适配：HHHH（究极社恐宅王）——你带他看世界，他给你安稳归属感'
+    },
+    BBBB:{
+      title:'嘴硬王者 · 护短狂魔',
+      desc:'外表强硬直接，原则清晰，不喜欢拐弯抹角。对外很强硬，对内极度温柔护短，对亲近的人会默默付出。',
+      family:'成长环境偏严格，父母讲道理多、情绪表达少，习惯用行动表达关心。',
+      pet:'缅因猫、德牧、中华田园犬（忠诚、有气场、不粘人过度）',
+      sport:'跑步、拳击、力量训练、篮球',
+      match:'最适配：ROOO（温柔治愈天使）——你负责保护，他负责温暖你'
+    },
+    YEYE:{
+      title:'发疯治愈双修 · 情绪充电宝',
+      desc:'情绪感知力极强，既能治愈别人，也会偶尔释放自己。温柔又有活力，擅长安慰人，也需要被理解。',
+      family:'家庭氛围温和，父母重视情绪关怀，从小被允许脆弱也被鼓励勇敢。',
+      pet:'布偶猫、垂耳兔、小仓鼠（软萌、治愈、安静陪伴）',
+      sport:'瑜伽、普拉提、慢跑、散步',
+      match:'最适配：XRAY（人间清醒）——你给情绪价值，他给稳定方向'
+    },
+    MENS:{
+      title:'阳光开朗大男孩 · 闷骚天花板',
+      desc:'表面阳光随和，很好相处，内心细腻敏感，戏很多但不外露。温柔深情，慢热，对喜欢的人会默默在意。',
+      family:'家庭民主宽松，父母尊重你的想法，不强迫不压抑。',
+      pet:'金渐层、哈士奇、侏儒兔（可爱又有点小个性）',
+      sport:'网球、游泳、滑板、徒步',
+      match:'最适配：CICI（刺猬精）——你耐心融化她，她给你独家温柔'
+    },
+    SOFT:{
+      title:'社交润滑剂 · 人间高情商菩萨',
+      desc:'性格温和圆融，擅长照顾别人感受，避免冲突，人缘极好。懂得换位思考，让人相处舒服。',
+      family:'家庭氛围和谐，父母教你体谅他人，重视礼貌与相处方式。',
+      pet:'加菲猫、比熊、金鱼、小乌龟（温顺、安静、治愈）',
+      sport:'羽毛球、乒乓球、太极、轻运动',
+      match:'最适配：LANM（佛系躺平大王）——你负责社交，他负责陪你放松'
+    },
+    ROOO:{
+      title:'温柔到犯规 · 治愈系天使',
+      desc:'内心柔软包容，耐心体贴，擅长安抚情绪，给人极强安全感。不喜欢争吵，习惯用温柔解决问题。',
+      family:'在充满包容的环境长大，父母情绪稳定，给足安全感。',
+      pet:'暹罗猫、柯尔鸭、小羊（温顺粘人、治愈感强）',
+      sport:'瑜伽、散步、拉伸、轻慢跑',
+      match:'最适配：DUAN（外冷内热傲娇怪）——你融化他的坚硬，他守护你的柔软'
+    },
+    LANM:{
+      title:'摆烂躺平至尊 · 佛系大王',
+      desc:'低欲望、低消耗，怎么舒服怎么来，不爱争抢，内心 peace。讨厌压力，喜欢简单轻松的生活节奏。',
+      family:'父母不强求、不内卷，给你自由宽松的成长空间。',
+      pet:'蓝猫、乌龟、金鱼（不用费心、安静陪伴）',
+      sport:'散步、冥想、慢运动、躺平式拉伸',
+      match:'最适配：SOFT（高情商菩萨）——你给松弛感，他给社交体面'
+    },
+    FUDD:{
+      title:'默默付出冤种 · 老好人本好',
+      desc:'习惯迁就别人，不擅长拒绝，重情重义，默默付出型。容易心软，对别人好常常忘了自己。',
+      family:'家庭强调懂事、谦让，从小被教育要照顾别人感受。',
+      pet:'贵宾犬、折耳猫、豚鼠（粘人、懂得回馈爱意）',
+      sport:'慢跑、骑行、轻健身',
+      match:'最适配：XRAY（人间清醒）——他保护你不受伤，你给他温暖陪伴'
+    },
+    '2FAC':{
+      title:'生人社恐 · 熟人疯批',
+      desc:'对外安静内敛，社恐被动；对熟人完全放飞，搞笑又话多。反差感极强，只对信任的人敞开心扉。',
+      family:'家庭偏内敛，不擅长表达亲密，习惯在熟悉的人面前放松。',
+      pet:'英短、龙猫、仓鼠（社恐同类，安静陪伴）',
+      sport:'独自运动：跑步、健身、游泳',
+      match:'最适配：TUCA（嘴强吐槽王者）——你们只有在彼此面前才不用装'
+    },
+    TUCA:{
+      title:'沉默吐槽灭霸 · 嘴强王者',
+      desc:'表面淡定沉默，内心疯狂吐槽，清醒犀利，不爱废话。看人很准，不喜欢虚伪社交。',
+      family:'父母理性直接，家里少客套，习惯真实表达。',
+      pet:'黑猫、狸花猫、聪明犬类（有个性、不粘人）',
+      sport:'拳击、跑步、爬山、硬核健身',
+      match:'最适配：2FAC（社恐疯批）——你懂她的奇怪，她懂你的毒舌'
+    },
+    HHHH:{
+      title:'究极社恐宅王 · 低能耗人类',
+      desc:'极度喜欢独处，社交极其耗能，宅家就是回血。不喜欢麻烦别人，也不喜欢被麻烦。',
+      family:'家庭安静，尊重个人空间，从小习惯独处。',
+      pet:'布偶猫、龙猫、宠物蛇（安静、独立、不用高频互动）',
+      sport:'居家健身、瑜伽、室内运动',
+      match:'最适配：HAHA（显眼包）——你给她归宿，她带你见世界'
+    },
+    XRAY:{
+      title:'高冷闷骚观察者 · 人间清醒',
+      desc:'通透理智，冷静客观，看透不说透，内心拎得极清。情绪稳定，不轻易被影响，像人形扫描仪。',
+      family:'父母理性、重视逻辑，教育偏讲道理，情绪表达克制。',
+      pet:'缅因、布偶、聪明犬（独立、有智商、不粘人）',
+      sport:'长跑、爬山、力量训练、高尔夫',
+      match:'最适配：FUDD（默默付出冤种）——你保护她，她治愈你'
+    },
+    AWAY:{
+      title:'心口不一别扭怪 · 傲娇之王',
+      desc:'心里想要嘴上拒绝，喜欢也说无所谓，别扭又可爱。不擅长直白表达，习惯口是心非。',
+      family:'家庭偏内敛，不擅长直白表达爱意，习惯含蓄沟通。',
+      pet:'傲娇猫类、小狐狸宠物、雪貂',
+      sport:'网球、羽毛球、跳舞',
+      match:'最适配：直率主动型人格，越直接越能打动你'
+    },
+    DUAN:{
+      title:'嘴硬心软傲娇怪 · 外冷内热',
+      desc:'外表冷淡强硬，内心温柔心软。不擅长表达关心，只会用行动默默照顾。',
+      family:'父母严肃内敛，爱都藏在行动里，不擅长说软话。',
+      pet:'德牧、蓝猫、狸花猫（外表酷、内心忠）',
+      sport:'健身、跑步、篮球、格斗',
+      match:'最适配：ROOO（温柔治愈天使）——你负责硬，他负责软'
+    },
+    CICI:{
+      title:'生人勿近刺猬精 · 慢热之王',
+      desc:'防备心强，慢热谨慎，不熟时高冷疏离，熟悉后柔软可爱。用坚硬外壳保护柔软内心。',
+      family:'家庭边界感强，或早期经历让你习惯自我保护。',
+      pet:'刺猬、龙猫、折耳猫（慢热、敏感、需要安全感）',
+      sport:'瑜伽、散步、慢跑、私人运动',
+      match:'最适配：MENS（闷骚阳光仔）——你只对他卸下防备，他只对你温柔'
+    },
+    EMMM:{
+      title:'精神内耗大师 · 想太多本多',
+      desc:'心思细腻敏感，共情极强，容易想太多，情绪内耗明显。善良温柔，但容易自我拉扯。',
+      family:'家庭情绪细腻，或父母对你期待高，让你习惯在意他人看法。',
+      pet:'治愈系小动物：垂耳兔、布偶猫、小仓鼠',
+      sport:'冥想、瑜伽、散步、写作运动',
+      match:'最适配：SOFT（高情商菩萨）——他懂你的敏感，给你稳稳的安全感'
+    }
+  };
+
+  document.querySelector('.test').style.display = 'none';
   document.getElementById('result').style.display = 'block';
-});
+  document.getElementById('code').innerText = `人格代号：${type}`;
+  document.getElementById('title').innerText = data[type].title;
+  document.getElementById('desc').innerText = data[type].desc;
+  document.getElementById('family').innerText = data[type].family;
+  document.getElementById('pet').innerText = data[type].pet;
+  document.getElementById('sport').innerText = data[type].sport;
+  document.getElementById('match').innerText = data[type].match;
+}
 </script>
 </body>
 </html>
