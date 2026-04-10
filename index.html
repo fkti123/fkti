@@ -2,22 +2,129 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>FKTI 人格测试</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FKTI 人格深度测试</title>
 <style>
 *{box-sizing:border-box}
-body{font-family:Arial,sans-serif;background:#fefefe;color:#333;max-width:720px;margin:0 auto;padding:22px;line-height:1.65}
-.question{margin:26px 0;padding-bottom:14px;border-bottom:1px solid #eee}
-.question p{font-weight:bold;margin-bottom:10px}
-.option{display:block;margin:9px 0;padding:11px 15px;background:#f8f8f8;border-radius:9px;cursor:pointer}
-.option:hover{background:#eef2ff}
-.option input{margin-right:9px}
-.btn{display:block;width:100%;padding:16px;background:#7799ff;color:#fff;border:none;border-radius:11px;font-size:17px;margin-top:32px;cursor:pointer}
-.btn:hover{background:#6688ee}
-.result{display:none;margin-top:40px;padding:30px;background:#f7f9ff;border-radius:14px}
-.result h2{color:#4477cc;margin-top:0}
-.code{font-size:22px;font-weight:bold;color:#5588dd;margin:10px 0}
-.section{margin:14px 0}
-.label{font-weight:bold;color:#4466cc}
+body{
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background:#fefefe;
+  color:#222;
+  max-width:720px;
+  margin:0 auto;
+  padding:20px;
+  line-height:1.8;
+  font-size:18px; /* 全局放大字体 */
+}
+h1{
+  font-size:28px;
+  text-align:center;
+  margin:20px 0 30px;
+  color:#333;
+}
+.question{
+  margin:30px 0;
+  padding-bottom:20px;
+  border-bottom:1px solid #eee;
+}
+.question p{
+  font-weight:bold;
+  margin-bottom:15px;
+  font-size:19px;
+}
+.option{
+  display:block;
+  margin:12px 0;
+  padding:14px 18px;
+  background:#f8f8f8;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:17px;
+}
+.option:hover{
+  background:#eef2ff;
+}
+.option input{
+  margin-right:12px;
+  transform:scale(1.3); /* 放大单选框 */
+}
+.btn{
+  display:block;
+  width:100%;
+  padding:18px;
+  background:#7799ff;
+  color:#fff;
+  border:none;
+  border-radius:12px;
+  font-size:20px;
+  font-weight:bold;
+  margin-top:40px;
+  cursor:pointer;
+}
+.btn:hover{
+  background:#6688ee;
+}
+.result{
+  display:none;
+  margin-top:40px;
+  padding:30px;
+  background:#f7f9ff;
+  border-radius:14px;
+}
+.result h2{
+  color:#4477cc;
+  margin-top:0;
+  font-size:26px;
+  text-align:center;
+}
+.code{
+  font-size:24px;
+  font-weight:bold;
+  color:#5588dd;
+  margin:15px 0;
+  text-align:center;
+}
+.result h3{
+  font-size:22px;
+  color:#333;
+  margin:20px 0 10px;
+}
+.section{
+  margin:18px 0;
+  font-size:18px;
+}
+.label{
+  font-weight:bold;
+  color:#4466cc;
+  font-size:19px;
+}
+/* 适配手机 */
+@media (max-width:768px){
+  body{
+    padding:15px;
+    font-size:17px;
+  }
+  h1{
+    font-size:24px;
+  }
+  .question p{
+    font-size:18px;
+  }
+  .option{
+    font-size:16px;
+    padding:12px 15px;
+  }
+  .btn{
+    font-size:18px;
+    padding:16px;
+  }
+  .result h2{
+    font-size:22px;
+  }
+  .code{
+    font-size:22px;
+  }
+}
 </style>
 </head>
 <body>
@@ -438,6 +545,8 @@ body{font-family:Arial,sans-serif;background:#fefefe;color:#333;max-width:720px;
   <div class="section"><span class="label">适合饲养的宠物：</span><span id="pet"></span></div>
   <div class="section"><span class="label">适合的运动：</span><span id="sport"></span></div>
   <div class="section"><span class="label">最适配恋爱对象：</span><span id="match"></span></div>
+
+  <button class="btn" onclick="location.reload()" style="margin-top:30px;">重新测试</button>
 </div>
 
 <script>
@@ -475,131 +584,131 @@ function showResult() {
   const data = {
     HAHA:{
       title:'人间显眼包 · 快乐病毒',
-      desc:'热情外放，感染力超强，喜欢热闹，走到哪里都能带动气氛。内心简单直接，不喜欢藏着掖着，情绪来得快去得也快。',
-      family:'家庭氛围通常轻松热闹，父母偏向鼓励式教育，从小被允许表达情绪。',
-      pet:'柯基、柴犬、小鹦鹉（需要能陪你疯、互动强的小动物）',
-      sport:'羽毛球、跳舞、骑行、团体游戏',
-      match:'最适配：HHHH（究极社恐宅王）——你带他看世界，他给你安稳归属感'
+      desc:'热情外放，感染力超强，喜欢热闹，走到哪里都能带动气氛。内心简单直接，不喜欢藏着掖着，情绪来得快去得也快，是朋友里的快乐源泉。',
+      family:'家庭氛围通常轻松热闹，父母偏向鼓励式教育，从小被允许表达情绪，在爱里长大的小太阳。',
+      pet:'柯基、柴犬、小鹦鹉（需要能陪你疯、互动强、活力满满的小动物）',
+      sport:'羽毛球、跳舞、骑行、团体游戏、飞盘',
+      match:'最适配：HHHH（究极社恐宅王）——你带他看遍世界热闹，他给你最安稳的归属感'
     },
     BBBB:{
       title:'嘴硬王者 · 护短狂魔',
-      desc:'外表强硬直接，原则清晰，不喜欢拐弯抹角。对外很强硬，对内极度温柔护短，对亲近的人会默默付出。',
-      family:'成长环境偏严格，父母讲道理多、情绪表达少，习惯用行动表达关心。',
-      pet:'缅因猫、德牧、中华田园犬（忠诚、有气场、不粘人过度）',
-      sport:'跑步、拳击、力量训练、篮球',
-      match:'最适配：ROOO（温柔治愈天使）——你负责保护，他负责温暖你'
+      desc:'外表强硬直接，原则清晰，不喜欢拐弯抹角。对外很强硬，怼天怼地，对内极度温柔护短，对亲近的人会默默付出，嘴硬心软第一名。',
+      family:'成长环境偏严格，父母讲道理多、情绪表达少，习惯用行动表达关心，从小被教要坚强、有担当。',
+      pet:'缅因猫、德牧、中华田园犬（忠诚、有气场、不粘人过度，能陪你一起酷）',
+      sport:'跑步、拳击、力量训练、篮球、格斗',
+      match:'最适配：ROOO（温柔治愈天使）——你负责为她遮风挡雨，她负责温暖你的所有坚硬'
     },
     YEYE:{
       title:'发疯治愈双修 · 情绪充电宝',
-      desc:'情绪感知力极强，既能治愈别人，也会偶尔释放自己。温柔又有活力，擅长安慰人，也需要被理解。',
-      family:'家庭氛围温和，父母重视情绪关怀，从小被允许脆弱也被鼓励勇敢。',
-      pet:'布偶猫、垂耳兔、小仓鼠（软萌、治愈、安静陪伴）',
-      sport:'瑜伽、普拉提、慢跑、散步',
-      match:'最适配：XRAY（人间清醒）——你给情绪价值，他给稳定方向'
+      desc:'情绪感知力极强，既能治愈别人，也会偶尔释放自己。温柔又有活力，擅长安慰人，是朋友的情绪树洞，也需要被理解、被接住情绪。',
+      family:'家庭氛围温和，父母重视情绪关怀，从小被允许脆弱也被鼓励勇敢，在包容中长大。',
+      pet:'布偶猫、垂耳兔、小仓鼠（软萌、治愈、安静陪伴，能给你情绪价值）',
+      sport:'瑜伽、普拉提、慢跑、散步、冥想',
+      match:'最适配：XRAY（人间清醒）——你给满格情绪价值，他给你最稳定的人生方向'
     },
     MENS:{
       title:'阳光开朗大男孩 · 闷骚天花板',
-      desc:'表面阳光随和，很好相处，内心细腻敏感，戏很多但不外露。温柔深情，慢热，对喜欢的人会默默在意。',
-      family:'家庭民主宽松，父母尊重你的想法，不强迫不压抑。',
-      pet:'金渐层、哈士奇、侏儒兔（可爱又有点小个性）',
-      sport:'网球、游泳、滑板、徒步',
-      match:'最适配：CICI（刺猬精）——你耐心融化她，她给你独家温柔'
+      desc:'表面阳光随和，很好相处，像小太阳一样温暖；内心细腻敏感，戏很多但不外露，温柔深情，慢热长情，对喜欢的人会默默在意、偷偷付出。',
+      family:'家庭民主宽松，父母尊重你的想法，不强迫不压抑，给你足够的自由做自己。',
+      pet:'金渐层、哈士奇、侏儒兔（可爱又有点小个性，懂你的温柔）',
+      sport:'网球、游泳、滑板、徒步、飞盘',
+      match:'最适配：CICI（刺猬精）——你用耐心慢慢融化她的防备，她给你全世界独一份的温柔'
     },
     SOFT:{
       title:'社交润滑剂 · 人间高情商菩萨',
-      desc:'性格温和圆融，擅长照顾别人感受，避免冲突，人缘极好。懂得换位思考，让人相处舒服。',
-      family:'家庭氛围和谐，父母教你体谅他人，重视礼貌与相处方式。',
-      pet:'加菲猫、比熊、金鱼、小乌龟（温顺、安静、治愈）',
-      sport:'羽毛球、乒乓球、太极、轻运动',
-      match:'最适配：LANM（佛系躺平大王）——你负责社交，他负责陪你放松'
+      desc:'性格温和圆融，擅长照顾别人感受，避免冲突，人缘极好。懂得换位思考，说话做事有分寸，让人相处起来极度舒服，是圈子里的和事佬。',
+      family:'家庭氛围和谐，父母教你体谅他人，重视礼貌与相处方式，从小被教要懂事、顾全大局。',
+      pet:'加菲猫、比熊、金鱼、小乌龟（温顺、安静、治愈，不吵不闹）',
+      sport:'羽毛球、乒乓球、太极、轻运动、散步',
+      match:'最适配：LANM（佛系躺平大王）——你负责对外社交体面，他负责陪你在家松弛躺平'
     },
     ROOO:{
       title:'温柔到犯规 · 治愈系天使',
-      desc:'内心柔软包容，耐心体贴，擅长安抚情绪，给人极强安全感。不喜欢争吵，习惯用温柔解决问题。',
-      family:'在充满包容的环境长大，父母情绪稳定，给足安全感。',
-      pet:'暹罗猫、柯尔鸭、小羊（温顺粘人、治愈感强）',
-      sport:'瑜伽、散步、拉伸、轻慢跑',
-      match:'最适配：DUAN（外冷内热傲娇怪）——你融化他的坚硬，他守护你的柔软'
+      desc:'内心柔软包容，耐心体贴，擅长安抚情绪，给人极强安全感。不喜欢争吵，习惯用温柔解决问题，对所有人都带着善意，是人间小温柔。',
+      family:'在充满包容的环境长大，父母情绪稳定，给足安全感，从小被爱包围，共情力拉满。',
+      pet:'暹罗猫、柯尔鸭、小羊（温顺粘人、治愈感强，能被你温柔对待）',
+      sport:'瑜伽、散步、拉伸、轻慢跑、冥想',
+      match:'最适配：DUAN（外冷内热傲娇怪）——你融化他的坚硬外壳，他用一生守护你的柔软'
     },
     LANM:{
       title:'摆烂躺平至尊 · 佛系大王',
-      desc:'低欲望、低消耗，怎么舒服怎么来，不爱争抢，内心 peace。讨厌压力，喜欢简单轻松的生活节奏。',
-      family:'父母不强求、不内卷，给你自由宽松的成长空间。',
-      pet:'蓝猫、乌龟、金鱼（不用费心、安静陪伴）',
-      sport:'散步、冥想、慢运动、躺平式拉伸',
-      match:'最适配：SOFT（高情商菩萨）——你给松弛感，他给社交体面'
+      desc:'低欲望、低消耗，怎么舒服怎么来，不爱争抢，内心peace&love。讨厌压力，喜欢简单轻松的生活节奏，是朋友里的情绪稳定器。',
+      family:'父母不强求、不内卷，给你自由宽松的成长空间，从小就没被催着赶路。',
+      pet:'蓝猫、乌龟、金鱼（不用费心、安静陪伴，跟你一样佛系）',
+      sport:'散步、冥想、慢运动、躺平式拉伸、瑜伽',
+      match:'最适配：SOFT（高情商菩萨）——你给她极致松弛感，她给你周全的社交体面'
     },
     FUDD:{
       title:'默默付出冤种 · 老好人本好',
-      desc:'习惯迁就别人，不擅长拒绝，重情重义，默默付出型。容易心软，对别人好常常忘了自己。',
-      family:'家庭强调懂事、谦让，从小被教育要照顾别人感受。',
-      pet:'贵宾犬、折耳猫、豚鼠（粘人、懂得回馈爱意）',
-      sport:'慢跑、骑行、轻健身',
-      match:'最适配：XRAY（人间清醒）——他保护你不受伤，你给他温暖陪伴'
+      desc:'习惯迁就别人，不擅长拒绝，重情重义，默默付出型。容易心软，对别人好常常忘了自己，是朋友里最靠谱的兜底人，总在默默扛事。',
+      family:'家庭强调懂事、谦让，从小被教育要照顾别人感受，习惯牺牲自己成全别人。',
+      pet:'贵宾犬、折耳猫、豚鼠（粘人、懂得回馈爱意，能感受到你的好）',
+      sport:'慢跑、骑行、轻健身、散步',
+      match:'最适配：XRAY（人间清醒）——他保护你不被欺负，你用温暖治愈他的理性'
     },
     '2FAC':{
       title:'生人社恐 · 熟人疯批',
-      desc:'对外安静内敛，社恐被动；对熟人完全放飞，搞笑又话多。反差感极强，只对信任的人敞开心扉。',
-      family:'家庭偏内敛，不擅长表达亲密，习惯在熟悉的人面前放松。',
-      pet:'英短、龙猫、仓鼠（社恐同类，安静陪伴）',
-      sport:'独自运动：跑步、健身、游泳',
-      match:'最适配：TUCA（嘴强吐槽王者）——你们只有在彼此面前才不用装'
+      desc:'对外安静内敛，社恐被动，像个小透明；对熟人完全放飞，搞笑又话多，反差感极强。只对信任的人敞开心扉，是慢热型的宝藏人格。',
+      family:'家庭偏内敛，不擅长表达亲密，习惯在熟悉的人面前放松，对外保持距离。',
+      pet:'英短、龙猫、仓鼠（社恐同类，安静陪伴，不用强行社交）',
+      sport:'独自运动：跑步、健身、游泳、攀岩',
+      match:'最适配：TUCA（嘴强吐槽王者）——你们只有在彼此面前，才不用假装、不用伪装'
     },
     TUCA:{
       title:'沉默吐槽灭霸 · 嘴强王者',
-      desc:'表面淡定沉默，内心疯狂吐槽，清醒犀利，不爱废话。看人很准，不喜欢虚伪社交。',
-      family:'父母理性直接，家里少客套，习惯真实表达。',
-      pet:'黑猫、狸花猫、聪明犬类（有个性、不粘人）',
-      sport:'拳击、跑步、爬山、硬核健身',
-      match:'最适配：2FAC（社恐疯批）——你懂她的奇怪，她懂你的毒舌'
+      desc:'表面淡定沉默，内心疯狂吐槽，清醒犀利，不爱废话。看人很准，不喜欢虚伪社交，是圈子里的人间清醒，毒舌但句句在理。',
+      family:'父母理性直接，家里少客套，习惯真实表达，从小就被教要拎得清、不盲从。',
+      pet:'黑猫、狸花猫、聪明犬类（有个性、不粘人，跟你一样有脾气）',
+      sport:'拳击、跑步、爬山、硬核健身、格斗',
+      match:'最适配：2FAC（社恐疯批）——你懂她的奇怪，她懂你的毒舌，天生一对'
     },
     HHHH:{
       title:'究极社恐宅王 · 低能耗人类',
-      desc:'极度喜欢独处，社交极其耗能，宅家就是回血。不喜欢麻烦别人，也不喜欢被麻烦。',
-      family:'家庭安静，尊重个人空间，从小习惯独处。',
-      pet:'布偶猫、龙猫、宠物蛇（安静、独立、不用高频互动）',
-      sport:'居家健身、瑜伽、室内运动',
-      match:'最适配：HAHA（显眼包）——你给她归宿，她带你见世界'
+      desc:'极度喜欢独处，社交极其耗能，宅家就是回血。不喜欢麻烦别人，也不喜欢被麻烦，是低欲望、低消耗的宅系天花板。',
+      family:'家庭安静，尊重个人空间，从小习惯独处，不被强迫社交，在自己的小世界里很舒服。',
+      pet:'布偶猫、龙猫、宠物蛇（安静、独立、不用高频互动，跟你一样宅）',
+      sport:'居家健身、瑜伽、室内运动、散步',
+      match:'最适配：HAHA（显眼包）——你给她最安稳的家，她带你见遍世界的热闹'
     },
     XRAY:{
       title:'高冷闷骚观察者 · 人间清醒',
-      desc:'通透理智，冷静客观，看透不说透，内心拎得极清。情绪稳定，不轻易被影响，像人形扫描仪。',
-      family:'父母理性、重视逻辑，教育偏讲道理，情绪表达克制。',
-      pet:'缅因、布偶、聪明犬（独立、有智商、不粘人）',
+      desc:'通透理智，冷静客观，看透不说透，内心拎得极清。情绪稳定，不轻易被影响，像人形扫描仪，能看穿一切虚伪，是朋友里的定海神针。',
+      family:'父母理性、重视逻辑，教育偏讲道理，情绪表达克制，从小就被教要独立、有主见。',
+      pet:'缅因、布偶、聪明犬（独立、有智商、不粘人，能跟上你的思路）',
       sport:'长跑、爬山、力量训练、高尔夫',
-      match:'最适配：FUDD（默默付出冤种）——你保护她，她治愈你'
+      match:'最适配：FUDD（默默付出冤种）——你保护她不被伤害，她用温柔治愈你的清醒'
     },
     AWAY:{
       title:'心口不一别扭怪 · 傲娇之王',
-      desc:'心里想要嘴上拒绝，喜欢也说无所谓，别扭又可爱。不擅长直白表达，习惯口是心非。',
-      family:'家庭偏内敛，不擅长直白表达爱意，习惯含蓄沟通。',
-      pet:'傲娇猫类、小狐狸宠物、雪貂',
-      sport:'网球、羽毛球、跳舞',
-      match:'最适配：直率主动型人格，越直接越能打动你'
+      desc:'心里想要嘴上拒绝，喜欢也说无所谓，别扭又可爱。不擅长直白表达，习惯口是心非，越在意越装酷，是需要被主动靠近的傲娇鬼。',
+      family:'家庭偏内敛，不擅长直白表达爱意，习惯含蓄沟通，从小就没被教过怎么说爱。',
+      pet:'傲娇猫类、小狐狸宠物、雪貂（跟你一样别扭，越爱越装）',
+      sport:'网球、羽毛球、跳舞、滑板',
+      match:'最适配：直率主动型人格，越直接越能打动你，用热情融化你的别扭'
     },
     DUAN:{
       title:'嘴硬心软傲娇怪 · 外冷内热',
-      desc:'外表冷淡强硬，内心温柔心软。不擅长表达关心，只会用行动默默照顾。',
-      family:'父母严肃内敛，爱都藏在行动里，不擅长说软话。',
-      pet:'德牧、蓝猫、狸花猫（外表酷、内心忠）',
-      sport:'健身、跑步、篮球、格斗',
-      match:'最适配：ROOO（温柔治愈天使）——你负责硬，他负责软'
+      desc:'外表冷淡强硬，像个不好惹的刺猬；内心温柔心软，不擅长表达关心，只会用行动默默照顾，是嘴硬心软的天花板。',
+      family:'父母严肃内敛，爱都藏在行动里，不擅长说软话，从小就被教要坚强、不矫情。',
+      pet:'德牧、蓝猫、狸花猫（外表酷、内心忠，跟你一样外冷内热）',
+      sport:'健身、跑步、篮球、格斗、力量训练',
+      match:'最适配：ROOO（温柔治愈天使）——你负责硬刚世界，她负责温暖你'
     },
     CICI:{
       title:'生人勿近刺猬精 · 慢热之王',
-      desc:'防备心强，慢热谨慎，不熟时高冷疏离，熟悉后柔软可爱。用坚硬外壳保护柔软内心。',
-      family:'家庭边界感强，或早期经历让你习惯自我保护。',
-      pet:'刺猬、龙猫、折耳猫（慢热、敏感、需要安全感）',
-      sport:'瑜伽、散步、慢跑、私人运动',
-      match:'最适配：MENS（闷骚阳光仔）——你只对他卸下防备，他只对你温柔'
+      desc:'防备心强，慢热谨慎，不熟时高冷疏离，像只带刺的刺猬；熟悉后柔软可爱，会把所有温柔给你。用坚硬外壳保护柔软内心，极度长情。',
+      family:'家庭边界感强，或早期经历让你习惯自我保护，对陌生人保持警惕，只对信任的人敞开心扉。',
+      pet:'刺猬、龙猫、折耳猫（慢热、敏感、需要安全感，跟你同频）',
+      sport:'瑜伽、散步、慢跑、私人运动、普拉提',
+      match:'最适配：MENS（闷骚阳光仔）——你只对他卸下防备，他只对你温柔到底'
     },
     EMMM:{
       title:'精神内耗大师 · 想太多本多',
-      desc:'心思细腻敏感，共情极强，容易想太多，情绪内耗明显。善良温柔，但容易自我拉扯。',
-      family:'家庭情绪细腻，或父母对你期待高，让你习惯在意他人看法。',
-      pet:'治愈系小动物：垂耳兔、布偶猫、小仓鼠',
-      sport:'冥想、瑜伽、散步、写作运动',
-      match:'最适配：SOFT（高情商菩萨）——他懂你的敏感，给你稳稳的安全感'
+      desc:'心思细腻敏感，共情极强，容易想太多，情绪内耗明显。善良温柔，但容易自我拉扯，太在意别人的看法，是敏感又心软的小天使。',
+      family:'家庭情绪细腻，或父母对你期待高，让你习惯在意他人看法，从小就学会了察言观色。',
+      pet:'治愈系小动物：垂耳兔、布偶猫、小仓鼠（软萌、安静，能治愈你的内耗）',
+      sport:'冥想、瑜伽、散步、写作、轻运动',
+      match:'最适配：SOFT（高情商菩萨）——他懂你的敏感，给你稳稳的安全感，治愈你的内耗'
     }
   };
 
